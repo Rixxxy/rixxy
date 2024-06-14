@@ -1,24 +1,26 @@
-def modulus(a, b):
+def divide(a, b):
     if b == 0:
-        raise ValueError("0 cannot be divisor")
-
-    # Work with positive values for the algorithm
-    abs_a, abs_b = abs(a), abs(b)
-
-    # Subtract b from a until a is less than b
-    while abs_a >= abs_b:
-        abs_a -= abs_b
-
-    # Determine the sign of the remainder based on the original dividend
-    return abs_a if a >= 0 else -abs_a
+        raise ValueError("Division by 0 not possible")
 
 
-# Input handling
+    a, b = abs(a), abs(b)
+
+    quotient = 0
+    while a >= b:
+        a -= b
+        quotient += 1
+
+    if (a < 0) != (b < 0):
+        return -a
+    else:
+        return a
+
+
 a = int(input("dividend: "))
 b = int(input("divisor: "))
 
 try:
-    result = modulus(a, b)
-    print("Remainder:", result)
+    result = divide(a, b)
+    print("Result:", result)
 except ValueError as e:
     print(e)
